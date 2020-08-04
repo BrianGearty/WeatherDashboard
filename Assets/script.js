@@ -1,7 +1,9 @@
 $(document).ready(function(){
-
-// Submit button click event
-    $("#submit").click(function(){
+    // Submit button click event
+    $("#submit").click(function(e){
+        // $(".current-display").empty();
+        // $(".week-display").empty()
+        e.preventDefault();
         var submit = $("#city-input").val();
     
         if (submit != "") {
@@ -12,7 +14,27 @@ $(document).ready(function(){
     
         getMainWeather(submit)
         
- });
+        // $("city-display").append('<button>' +submit+ '</button>');
+        var maxCity = 10;
+        var button= $('<input type="button"/>'); $(button).attr("value", submit);
+        
+        
+        var cityDisplay = $(".city-display").append(button);
+        var cityArray = [];
+        
+        var setStorage = localStorage.setItem("city", cityDisplay);
+        var getStorage = localStorage.getItem("city");
+
+        console.log(setStorage);
+        // console.log(getStorage);
+
+        $(".city-display").append(getStorage);
+    
+        // for (i = 0; i < localStorage.length; i++) {
+        //     x = localStorage.key(i);
+        //     $(".city-display").append(x);
+        // }
+});
 
 // Calling weather for city search
     function getMainWeather(searchTerm) {
@@ -67,30 +89,27 @@ $(document).ready(function(){
             url: queryURL,
             method: "GET"
         }) .then(function(response){
-            console.log(iconURL)
+            // console.log(iconURL)
             var fiveDayCleaned = [response.list[0], response.list[8], response.list[16], response.list[24], response.list[32]];
             var fiveDayIcon = [response.list[0].weather[0].icon, response.list[8].weather[0].icon, response.list[16].weather[0].icon, response.list[24].weather[0].icon, response.list[32].weather[0].icon]
-            // Adding cards for the 5 day forecast
+// Adding cards for the 5 day forecast
             for (let i = 0; i < fiveDayCleaned.length; i++) {
 // Adding Icons to 5 day forecast 
                 var iconURL = "http://openweathermap.org/img/w/" + fiveDayIcon[i] + ".png";
                 var cardIcon = $("<h4>").html("<img src=" + iconURL  + ">");
-                var cardContainer = $('<div>').addClass('card card-block')
+                var cardContainer = $('<div>').addClass('card col-md-2')
                 var cardBody = $("<div>").addClass("card-body");
-                var cardDate = $("<h3>").text(fiveDayCleaned[i].dt_txt.split(" ")[0])
+                var cardDate = $("<h4>").text(fiveDayCleaned[i].dt_txt.split(" ")[0])
                 var cardTemp = $("<h5>").text("Temp: " +fiveDayCleaned[i].main.temp);
                 var cardHumid = $("<h5>").text("Humidity: " +fiveDayCleaned[i].main.humidity +"%");
                 cardBody.append(cardDate, cardIcon, cardTemp, cardHumid)
                 cardContainer.append(cardBody)
                 $('.card-deck').append(cardContainer)
 
-            
-            
-
 
             }
         })
-                
+
     }
 
 

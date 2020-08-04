@@ -25,7 +25,7 @@
 }
 /* Current City Jumbotron */
 .current-display {
-    width: 65%;
+    width: 70%;
     height:300px;
     float: right;
     margin-right: 35px;
@@ -63,7 +63,7 @@
 
 /*  5 day forecast Jumbotron */
 .week-display {
-    width: 65%;
+    width: 70%;
     height:250px;
     float: right;
     margin-right: 35px;
@@ -74,16 +74,18 @@
     text-align: center;
 
 }
-.card-deck {
-    
-}
 
-h3 {
-    font-size: large;
-    margin-right: 10px;
+.card {
+    margin-left: 30px;
+}
+h4 {
+    font-size: 20px;
+    text-align: center;
+    margin-left: auto;
 }
 
 h5 {
-    font-size: medium;
-    margin-right: 10px;
+    font-size: 15px;
+    margin-left: auto;
+    text-align: center;
 }
