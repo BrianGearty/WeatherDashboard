@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Assets/style.css" />
+    <title>Weather Dashboard</title>
+    
+</head>
+<body>
+    <nav class="nav">
+        <h1>Weather Dashboard</h1>
+    </nav>
+    <input type="text" id="city-input" name="city" placeholder="Search for a city">
+    <button id="submit" class="btn btn-primary">Submit</button>
+    <div class="row">
+    <aside class="col-md-3 city-display">
+
+    </aside>
+<div class="jumbotron current-display">
+        <div class="city"></div>
+        <span class="date"></span><span class="icon"></span>
+        <div class="temp"></div>
+        <div class="wind"></div>
+        <div class="humidity"></div>
+        <div class="uvIndex"></div> 
+</div>   
+    <div class="jumbotron week-display">
+        <h3 class ="five-day">5 Day Forecast</h3>
+        <div class= "card-deck">
+        <!-- <div class="card-deck">
+            <div class="card">
+            
+            <div class="card-body">
+                <h5 class="card-title one"></h5>
+                <p class="card-text One"></p>
+                <p class="humid"></p>
+
+            </div>
+            </div>
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title two"></h5>
+                <p class="card-text Two"></p>
+                <p class="humid"></p>
+            </div>
+            </div>
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title three"></h5>
+                <p class="card-text Three"></p>
+                <p class="humid"></p>
+            </div>
+            </div>
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title four"></h5>
+                    <p class="card-text Four"></p>
+                    <p class="humid"></p>
+                </div>
+                </div>
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title five"></h5>
+                    <p class="card-text Five"></p>
+                    <p class="humid"></p>
+                </div>
+                </div>
+        </div> -->
+    </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./Assets/script.js"></script>
+</body>
+</html>
