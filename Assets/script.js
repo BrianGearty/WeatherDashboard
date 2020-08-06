@@ -1,7 +1,5 @@
 $(document).ready(function(){
     // Submit button click event
-    // $(".current-display").empty();
-    // $(".week-display").empty();
 
     var cityArray = ["Atlanta", "Seattle", "Miami", "New York"];
 
@@ -10,6 +8,7 @@ $(document).ready(function(){
     if(loggedData != null){
         cityArray = loggedData;
     };
+showHistory();
 
 
     $("#submit").click(function(e){
@@ -27,14 +26,36 @@ $(document).ready(function(){
         getMainWeather(submit)
         // Setting and Getting Local Storage
         var button= $('<input type="button"/>');
-        $(button).attr("value", submit); 
+        // $(button).attr("value", submit); 
+        // $(button).addClass("btn history-button");
+        // $("#button-holder").append(button);
+        
+        cityArray.push(submit);
+        localStorage.setItem("savedCity", JSON.stringify(cityArray));
+        showHistory();
+
+    });
+// Show city buttons
+    function showHistory(){
+        $("#button-holder").empty()
+    for(var i =0; i <cityArray.length; i++) {
+        var button= $('<input type="button"/>');
+        $(button).attr("value", cityArray[i]); 
         $(button).addClass("btn history-button");
         $("#button-holder").append(button);
         
-        $(cityArray).push(submit);
-        localStorage.setItem("savedCity", JSON.stringify(cityArray));
-
-    });
+    
+    }
+    $(".history-button").click(function(){
+        
+        console.log(this)
+        var inputBtn = $(this).val()
+        console.log(inputBtn)
+        getMainWeather(inputBtn);
+        get5Day(inputBtn);
+        
+    })
+    }
     
     // Calling weather for city search
     function getMainWeather(searchTerm) {
@@ -88,13 +109,12 @@ $(document).ready(function(){
             }
             
             GetUvIndex()
-            get5Day(searchTerm)
         })
     }
     // Calling the 5 day forecast for city search
     function get5Day(searchTerm) {
-        // console.log('time ot hit the 5 day api url!!!', searchTerm)
-        
+    
+        $(".card-deck").empty();
         var apiKey= "58eaa9883fe1ae8b7ca141f8514a59b6";
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&appid="+apiKey + "&units=imperial";
         $.ajax({
@@ -105,6 +125,9 @@ $(document).ready(function(){
             var fiveDayCleaned = [response.list[0], response.list[8], response.list[16], response.list[24], response.list[32]];
             var fiveDayIcon = [response.list[0].weather[0].icon, response.list[8].weather[0].icon, response.list[16].weather[0].icon, response.list[24].weather[0].icon, response.list[32].weather[0].icon]
             // Adding cards for the 5 day forecast
+
+            //empty the cardForecast
+
             for (let i = 0; i < fiveDayCleaned.length; i++) {
                 // Adding Icons to 5 day forecast 
                 var iconURL = "http://openweathermap.org/img/w/" + fiveDayIcon[i] + ".png";
@@ -117,23 +140,10 @@ $(document).ready(function(){
                 cardBody.append(cardDate, cardIcon, cardTemp, cardHumid)
                 cardContainer.append(cardBody)
                 $('.card-deck').append(cardContainer)
-                
+                console.log(cardContainer)
                 
             }
         })
         
     }
-    
-    $(".history-button").click(function(){
-        
-        getMainWeather()
-        
-    })
-    
-    
-    
-    
-    
-    
-    
 });

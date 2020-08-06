@@ -19,14 +19,11 @@
         <div class="row">
             <!-- Aside holding Search bar and Buttons -->
             <aside class="city-display">
-                <div class="col-md-4 " id="button-holder">
+                <div class="col-md-4 " >
                     <input type="text" id="city-input" name="city" placeholder="Search for a city">
                     <button id="submit" class="btn btn-primary">Submit</button>
-                        <button class="btn history-button" value="Atlanta">Atlanta</button>
-                        <button class="btn history-button" value="Seattle">Seattle</button>
-                        <button class="btn history-button" value="Miami">Miami</button>
-                        <button class="btn history-button" value="New York">New York</button>
-                    </div>
+                <div id="button-holder"></div>    
+                </div>
             </aside>
             <!-- Showing Current City Display -->
                     <div class="jumbotron col-md-8 current-display">
@@ -40,7 +37,7 @@
             <!-- Showing 5 day Forecast -->
                     <div class="jumbotron col-md-8 week-display">
                         <h3 class ="five-day">5 Day Forecast</h3>
-                        <div class= "card-deck row">
+                        <div id="cardForecast" class= "card-deck row">
                         </div>
                     </div>
 
