@@ -96,16 +96,16 @@ showHistory();
                 }) .then(function(response){
                     $(".uv-index").text("UV Index: " + response.value.toFixed());
                     
+                    if (response.value < 3) {
+                        $(".uv-index").addClass("low-uv").removeClass("moderate-uv high-uv danger-uv");
+                    } else if (response.value < 7) {
+                        $(".uv-index").addClass("moderate-uv").removeClass("low-uv high-uv danger-uv");
+                    } else if (response.value < 10) {
+                        $(".uv-index").addClass("high-uv").removeClass("moderate-uv low-uv danger-uv");
+                    } else {
+                        $(".uv-index").addClass("danger-uv").removeClass("moderate-uv high-uv low-uv");
+                    }
                 })
-                if (response.value < 3) {
-                    $(".uv-index").addClass("low-uv").removeClass("moderate-uv high-uv danger-uv");
-                } else if (response.value < 7) {
-                    $(".uv-index").addClass("moderate-uv").removeClass("low-uv high-uv danger-uv");
-                } else if (response.value < 10) {
-                    $(".uv-index").addClass("high-uv").removeClass("moderate-uv low-uv danger-uv");
-                } else {
-                    $(".uv-index").addClass("danger-uv").removeClass("moderate-uv high-uv low-uv");
-                }
             }
             
             GetUvIndex()
