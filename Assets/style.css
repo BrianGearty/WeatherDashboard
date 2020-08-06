@@ -1,82 +1,120 @@
+/* Header */
 .nav {
     text-align: center;
-    background-color: aquamarine;
-    margin-bottom: 35px;
-
+    background-color: grey;
+    border-bottom: aquamarine 5px groove;
+    margin-bottom: 50px;
 }
 
+/* Search Bar & Submit Button */
 #city-input {
-    margin-left: 35px;
+    width: 250px;
+    margin: 5px;
 
 }
 
 #submit {
-    margin-left: 10px;
-
+    margin-left: auto;
+    width:200px;
+    margin-left: 30px;
+}
+.history-button {
+    margin: 5px;
 }
 /* Aside */
 .city-display {
     width: 300px;
     height: 545px;
+    background-color: grey;
+    border: aquamarine 5px groove;
+    margin:auto;
     float: left;
-    background-color: aquamarine;
-    margin: 35px;
-    
-}
+    }
+
 /* Current City Jumbotron */
 .current-display {
     width: 70%;
     height:300px;
-    float: right;
-    margin-right: 35px;
     padding: 5px;
+    padding-bottom: 10px;
+    background-color: grey;
+    border: aquamarine 5px groove;
+    float: right;
 }
 /* For the Current City Weather */
 .city {
     text-align: center;
     font-size: x-large;
-    margin: 20px;
+    margin: 10px;
+    font-weight: bold;
 }
 .date {
     margin: 20px;
+    font-weight: bold;
 }
 .icon {
     margin: 20px;
+    font-weight: bold;
 }
 
 .temp {
     margin: 20px;
+    font-weight: bold;
 }
 
 .wind {
     margin: 20px;
+    font-weight: bold;
 }
 
 .humidity {
     margin: 20px;
+    font-weight: bold;
 }
 
-.uvIndex {
+.uv-index {
     margin: 20px;
+    font-weight: bold;
+}
+.low-uv {
+    background-color: green;
+}
+.moderate-uv {
+    background-color: orange;
+}
+.high-uv {
+    background-color: red;
+}
+.danger-uv {
+    background-color: purple;
 }
 
 
 /*  5 day forecast Jumbotron */
 .week-display {
     width: 70%;
-    height:250px;
-    float: right;
-    margin-right: 35px;
+    height:300px;
     padding: 0px;
+    background-color: grey;
+    border: aquamarine 5px groove;
+    float: right;
+}
 
+.card-body {
+    height: fit-content;
+    background-color:aquamarine;
+    padding: 5px;
+    border: 2px black;
+    border-radius: 10px;
+    border: black 3px groove;
 }
 .five-day {
     text-align: center;
-
+    font-weight: bold;
 }
 
 .card {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 h4 {
     font-size: 20px;

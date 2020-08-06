@@ -1,67 +1,69 @@
 $(document).ready(function(){
     // Submit button click event
-    $("#submit").click(function(e){
-        // $(".current-display").empty();
-        // $(".week-display").empty()
-        e.preventDefault();
-        var submit = $("#city-input").val();
-    
-        if (submit != "") {
+    // $(".current-display").empty();
+    // $(".week-display").empty();
 
+    var cityArray = ["Atlanta", "Seattle", "Miami", "New York"];
+
+    var loggedData = localStorage.getItem("savedCity");
+    loggedData = JSON.parse(loggedData);
+    if(loggedData != null){
+        cityArray = loggedData;
+    };
+
+
+    $("#submit").click(function(e){
+        // e.preventDefault();
+        // e.stopPropagation();
+
+        
+        var submit = $("#city-input").val();
+        
+        if (submit != "") {
+            
         } else {
             alert("Please enter a city name");
         }
-    
         getMainWeather(submit)
+        // Setting and Getting Local Storage
+        var button= $('<input type="button"/>');
+        $(button).attr("value", submit); 
+        $(button).addClass("btn history-button");
+        $("#button-holder").append(button);
         
-        // $("city-display").append('<button>' +submit+ '</button>');
-        var maxCity = 10;
-        var button= $('<input type="button"/>'); $(button).attr("value", submit);
-        
-        
-        var cityDisplay = $(".city-display").append(button);
-        var cityArray = [];
-        
-        var setStorage = localStorage.setItem("city", cityDisplay);
-        var getStorage = localStorage.getItem("city");
+        $(cityArray).push(submit);
+        localStorage.setItem("savedCity", JSON.stringify(cityArray));
 
-        console.log(setStorage);
-        // console.log(getStorage);
-
-        $(".city-display").append(getStorage);
+    });
     
-        // for (i = 0; i < localStorage.length; i++) {
-        //     x = localStorage.key(i);
-        //     $(".city-display").append(x);
-        // }
-});
-
-// Calling weather for city search
+    // Calling weather for city search
     function getMainWeather(searchTerm) {
+        
         var apiKey= "58eaa9883fe1ae8b7ca141f8514a59b6";
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+searchTerm+"&appid="+apiKey;
         $.ajax({
             url: queryURL,
             method: "GET"
-// Adding parameters to the page for city search
+            // Adding parameters to the page for city search
         }) .then(function(response){
             // console.log(response)
-// Making another pull from API for weather icon
+            // Making another pull from API for weather icon
             var icon = response.weather[0].icon;
             var iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
             var tempF = (response.main.temp - 273.15) * 1.80 + 32;
-// Making variable for current date and time
+            // Making variable for current date and time
             const now = moment().format('MMMM Do YYYY');
+            // Appending responses to page
             $(".date").text(JSON.stringify(now))
             $(".city").text(JSON.stringify(response.name));  
             $(".icon").html("<img src=" + iconURL  + ">");
             $(".temp").text(JSON.stringify("Temperature (F): " + tempF.toFixed(1) )); 
             $(".wind").text(JSON.stringify("Wind Speed: " + response.wind.speed +" mph"));
             $(".humidity").text(JSON.stringify("Humidity: " + response.main.humidity + "%"));
-// Setting Lat and Lon for the UV index API call
+            // Setting Lat and Lon for the UV index API call
             var lat = response.coord.lat
             var lon = response.coord.lon
-// Calling UV Index API from the lat and lon of the main weather API
+            // Calling UV Index API from the lat and lon of the main weather API
             function GetUvIndex() {
                 
                 var api= "58eaa9883fe1ae8b7ca141f8514a59b6";
@@ -71,15 +73,25 @@ $(document).ready(function(){
                     url: QueryURL,
                     method: "GET"
                 }) .then(function(response){
-                $(".uvIndex").append("UV Index: " +response.value.toFixed());
-                console.log()
+                    $(".uv-index").text("UV Index: " + response.value.toFixed());
+                    
                 })
+                if (response.value < 3) {
+                    $(".uv-index").addClass("low-uv").removeClass("moderate-uv high-uv danger-uv");
+                } else if (response.value < 7) {
+                    $(".uv-index").addClass("moderate-uv").removeClass("low-uv high-uv danger-uv");
+                } else if (response.value < 10) {
+                    $(".uv-index").addClass("high-uv").removeClass("moderate-uv low-uv danger-uv");
+                } else {
+                    $(".uv-index").addClass("danger-uv").removeClass("moderate-uv high-uv low-uv");
+                }
             }
+            
             GetUvIndex()
             get5Day(searchTerm)
         })
     }
-// Calling the 5 day forecast for city search
+    // Calling the 5 day forecast for city search
     function get5Day(searchTerm) {
         // console.log('time ot hit the 5 day api url!!!', searchTerm)
         
@@ -92,9 +104,9 @@ $(document).ready(function(){
             // console.log(iconURL)
             var fiveDayCleaned = [response.list[0], response.list[8], response.list[16], response.list[24], response.list[32]];
             var fiveDayIcon = [response.list[0].weather[0].icon, response.list[8].weather[0].icon, response.list[16].weather[0].icon, response.list[24].weather[0].icon, response.list[32].weather[0].icon]
-// Adding cards for the 5 day forecast
+            // Adding cards for the 5 day forecast
             for (let i = 0; i < fiveDayCleaned.length; i++) {
-// Adding Icons to 5 day forecast 
+                // Adding Icons to 5 day forecast 
                 var iconURL = "http://openweathermap.org/img/w/" + fiveDayIcon[i] + ".png";
                 var cardIcon = $("<h4>").html("<img src=" + iconURL  + ">");
                 var cardContainer = $('<div>').addClass('card col-md-2')
@@ -105,19 +117,23 @@ $(document).ready(function(){
                 cardBody.append(cardDate, cardIcon, cardTemp, cardHumid)
                 cardContainer.append(cardBody)
                 $('.card-deck').append(cardContainer)
-
-
+                
+                
             }
         })
-
+        
     }
-
-
-
-
-
-
-
-
-
+    
+    $(".history-button").click(function(){
+        
+        getMainWeather()
+        
+    })
+    
+    
+    
+    
+    
+    
+    
 });
