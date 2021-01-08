@@ -3,6 +3,8 @@
 Repository page: https://github.com/BrianGearty/WeatherDashboard
 Deployed Git hub page: https://briangearty.github.io/WeatherDashboard/ 
 
+Going on a vacation? Want to plan your day but its depending on weather?? With this weather dashboard you can check the current weather and 5 day forecast of any city in the world!
+
 You can get a 5 day forecast for any city in the world by its name.
 ![wholeapp](https://user-images.githubusercontent.com/64609758/89567261-59aeb980-d7ef-11ea-851c-c5c055b6b153.png)
 
